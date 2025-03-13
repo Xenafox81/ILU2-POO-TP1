@@ -62,7 +62,7 @@ public class Village {
 		private String afficherMarche() {
 			StringBuilder chaine = new StringBuilder();
 			int etalsVide = 0;
-			chaine.append("Le march� du village \""+ nom +"\" poss�de plusieurs �tals :\n");
+			chaine.append("Le marche du village \""+ nom +"\" possede plusieurs etals :\n");
 			for (int i = 0; i < etals.length; i++) {
 				if (etals[i].isEtalOccupe()) {
 					chaine.append(etals[i].afficherEtal());
@@ -71,7 +71,7 @@ public class Village {
 				}
 			}
 			if (etalsVide != 0) {
-				chaine.append("Il reste " + (etalsVide) +" �tals non utilis�s dans le march�.\n");
+				chaine.append("Il reste " + (etalsVide) +" etals non utilises dans le marche.\n");
 			}
 			return chaine.toString();
 		}
@@ -113,7 +113,7 @@ public class Village {
 
 	public String afficherVillageois() {
 		if (chef == null){
-			throw new VillageSansChefException("Pas de chef");
+			throw new VillageSansChefException("Il n'y a pas de chef");
 		}
 
 		StringBuilder chaine = new StringBuilder();
@@ -135,7 +135,7 @@ public class Village {
 		int etal = marche.trouverEtalLibre();
 		chaine.append(vendeur.getNom() + " cherche un endroit pour vendre " + nbProduit + " " + produit + ".\n");
 		marche.utiliserEtal(etal, vendeur, produit, nbProduit);
-		chaine.append("Le vendeur " + vendeur.getNom() + "vend des " + produit + " � l'�tal n�" + (etal+1) + ".\n");
+		chaine.append("Le vendeur " + vendeur.getNom() + "vend des " + produit + " a l'etal n " + (etal+1) + ".\n");
 		return chaine.toString();
 	}
 	
@@ -144,10 +144,10 @@ public class Village {
 		Etal [] lstEtals = marche.trouverEtals(produit);
 		switch (lstEtals.length) {
 		case 0: {
-			chaine.append("Il n'y a pas de vendeur qui propose des " + produit + " au march�.\n");
+			chaine.append("Il n'y a pas de vendeur qui propose des " + produit + " au marche.\n");
 			break;
 		} case 1: {
-			chaine.append("Seul le vendeur " + lstEtals[0].getVendeur().getNom() + " propose des " + produit + " au march�.\n");
+			chaine.append("Seul le vendeur " + lstEtals[0].getVendeur().getNom() + " propose des " + produit + " au marche.\n");
 			break;
 		}
 		default:
