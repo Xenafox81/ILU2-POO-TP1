@@ -1,9 +1,5 @@
 package villagegaulois;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Iterator;
-
 import personnages.Chef;
 import personnages.Gaulois;
 
@@ -39,15 +35,30 @@ public class Village {
 		}
 		
 		private Etal[] trouverEtals(String produit) {
-			Etal [] lstEtals = new Etal[etals.length];
-			int nbEtals = 0;
-			for (int i = 0; i < lstEtals.length; i++) {
-				if (etals[i].contientProduit(produit)) {
-					lstEtals[nbEtals] = etals[i];
-					nbEtals++;
+			int length_tab = 0;
+			
+			/* 
+			 * for-each : ici on a juste besoin de parcourir et non modif les éléments du tableau
+			 * en ayant besoin d'accéder aux indices 
+			 * */
+			for (Etal etal : etals) {
+				if (etal.contientProduit(produit))
+				{
+					length_tab++;
 				}
 			}
-			return Arrays.copyOf(lstEtals, nbEtals);
+			
+			Etal[] etals_produits = new Etal[length_tab];
+			int j = 0;
+			
+			/* for-each*/
+			for (Etal etal : etals) {
+				if (etal.contientProduit(produit)) {
+					etals_produits[j++]= etal;
+				}
+			}
+			
+			return etals_produits;
 		}
 		
 		private Etal trouverVendeur(Gaulois gaulois) {

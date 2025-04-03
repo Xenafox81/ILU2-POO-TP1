@@ -1,7 +1,6 @@
 package histoire;
 
-import personnages.Gaulois;
-import villagegaulois.Etal;
+
 import villagegaulois.Village;
 import villagegaulois.VillageSansChefException;
 
