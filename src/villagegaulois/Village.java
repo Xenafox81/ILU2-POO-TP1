@@ -11,7 +11,7 @@ public class Village {
 	
 	private Marche marche;
 
-	private class Marche {
+	private static class Marche {
 		private Etal[] etals;
 
 		private Marche(int nbEtals) {
@@ -35,7 +35,7 @@ public class Village {
 		}
 		
 		private Etal[] trouverEtals(String produit) {
-			int length_tab = 0;
+			int nbEtals = 0;
 			
 			/* 
 			 * for-each : ici on a juste besoin de parcourir et non modif les éléments du tableau
@@ -44,17 +44,18 @@ public class Village {
 			for (Etal etal : etals) {
 				if (etal.contientProduit(produit))
 				{
-					length_tab++;
+					nbEtals++;
 				}
 			}
 			
-			Etal[] etals_produits = new Etal[length_tab];
-			int j = 0;
+			Etal[] etals_produits = new Etal[nbEtals];
 			
 			/* for-each*/
-			for (Etal etal : etals) {
+			for (int i = 0,  j = 0; i < etals.length; i++) {
+				Etal etal = etals[i];
 				if (etal.contientProduit(produit)) {
-					etals_produits[j++]= etal;
+					etals_produits[j]= etal;
+					j++;
 				}
 			}
 			
@@ -73,7 +74,6 @@ public class Village {
 		private String afficherMarche() {
 			StringBuilder chaine = new StringBuilder();
 			int etalsVide = 0;
-			chaine.append("Le marche du village \""+ nom +"\" possede plusieurs etals :\n");
 			for (int i = 0; i < etals.length; i++) {
 				if (etals[i].isEtalOccupe()) {
 					chaine.append(etals[i].afficherEtal());
@@ -178,8 +178,8 @@ public class Village {
 		 return rechercherEtal(vendeur).libererEtal();
 	 }
 	 
-	 public String afficherMarche() {
-		 return marche.afficherMarche();
+	 public String afficherMarche() { 
+		 return "Le marche du village : \"" + nom + "\"" + " possede plusieurs etals :\n" +  marche.afficherMarche();
 	 }
 
 }

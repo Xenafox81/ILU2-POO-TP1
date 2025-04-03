@@ -5,6 +5,7 @@ import personnages.Druide;
 import personnages.Gaulois;
 import villagegaulois.Etal;
 import villagegaulois.Village;
+import villagegaulois.VillageSansChefException;
 
 public class Scenario {
 
@@ -24,7 +25,11 @@ public class Scenario {
 		village.ajouterHabitant(obelix);
 		village.ajouterHabitant(druide);
 		village.ajouterHabitant(abraracourcix);
-		village.afficherVillageois();
+		try {
+			village.afficherVillageois();
+		} catch (VillageSansChefException e) {
+			System.out.println(e);
+		}
 
 		System.out.println(village.rechercherVendeursProduit("fleurs"));
 		System.out.println(village.installerVendeur(bonemine, "fleurs", 20));
@@ -36,11 +41,23 @@ public class Scenario {
 
 		System.out.println(village.rechercherVendeursProduit("fleurs"));
 		Etal etalFleur = village.rechercherEtal(bonemine);
+		try {
 		System.out.println(etalFleur.acheterProduit(10, abraracourcix));
 		System.out.println(etalFleur.acheterProduit(15, obelix));
 		System.out.println(etalFleur.acheterProduit(15, assurancetourix));
-		System.out.println(village.partirVendeur(bonemine));
-		System.out.println(village.afficherMarche());
+		}catch (IllegalArgumentException e) {
+		    // Traite l'exception IllegalArgumentException
+		    System.out.println("Erreur : La quantité d'achat est invalide (doit être >= 1).");
+		    e.printStackTrace();
+		} catch (IllegalStateException e) {
+		    // Traite l'exception IllegalStateException
+		    System.out.println("Erreur : L'étal n'est pas occupé.");
+		    e.printStackTrace();
+		} catch (NullPointerException e) {
+		    // Traite l'exception NullPointerException
+		    System.out.println("Erreur : Une des valeurs passées est nulle.");
+		    e.printStackTrace();
+		}
+		}
 	}
 
-}
